@@ -12,7 +12,7 @@ const Dashboard: React.FC = () => {
     {
       label: 'Impianto Principale',
       value: '564 kW',
-      sub: 'Monitoraggio Digital Twin attivo',
+      sub: 'Monitoraggio CER attivo',
       icon: Zap,
       iconColor: 'text-yellow-500',
       iconBg: 'bg-yellow-50',
@@ -48,7 +48,7 @@ const Dashboard: React.FC = () => {
   ];
 
   const notifications = [
-    { id: 1, title: 'Anomalia Inverter 2', description: 'Rilevato calo di tensione anomalo nel Digital Twin.', time: '2 min fa', type: 'error' },
+    { id: 1, title: 'Anomalia Inverter 2', description: 'Rilevato calo di tensione anomalo nella CER.', time: '2 min fa', type: 'error' },
     { id: 2, title: 'POD #452 Offline', description: 'Il carico aziendale non risponde alle query AI.', time: '15 min fa', type: 'warning' },
     { id: 3, title: 'Ottimizzazione Suggerita', description: 'Opportunità di condivisione energia tra Consumer 1 e 3.', time: '1 ora fa', type: 'info' },
   ];
