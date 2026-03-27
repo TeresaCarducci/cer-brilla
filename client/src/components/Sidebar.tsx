@@ -1,5 +1,5 @@
 import React from 'react';
-import { LayoutDashboard, Users, Settings } from 'lucide-react';
+import { LayoutDashboard, Users, Settings, Bell } from 'lucide-react';
 
 interface SidebarProps {
   activeTab: string;
@@ -11,6 +11,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab, onLogout }) 
   const menuItems = [
     { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
     { id: 'community', label: 'Community', icon: Users },
+    { id: 'notifications', label: 'Notifiche', icon: Bell },
     { id: 'settings', label: 'Impostazioni', icon: Settings },
   ];
 

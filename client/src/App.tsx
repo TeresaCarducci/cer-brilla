@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Sidebar from './components/Sidebar';
 import Dashboard from './components/Dashboard';
 import Community from './components/Community';
+import Notifications from './components/Notifications';
 import Login from './components/Login';
 import { FileText, Settings } from 'lucide-react';
 
@@ -15,6 +16,8 @@ const App: React.FC = () => {
         return <Dashboard />;
       case 'community':
         return <Community />;
+      case 'notifications':
+        return <Notifications />;
       case 'reports':
         return (
           <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
