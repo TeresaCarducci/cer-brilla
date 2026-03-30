@@ -46,3 +46,4 @@ Area per la validazione dei dati economici e degli incentivi ottenuti tramite il
 ### Archivio Report
 Generatore di documenti mensili dettagliati (es. Report Maggio 2025) pronti per la consultazione web o la stampa.
 
+## 4. Dati CER
