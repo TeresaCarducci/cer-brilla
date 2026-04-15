@@ -5,11 +5,12 @@ import Community from './components/Community';
 import CER from './components/CER';
 import Notifications from './components/Notifications';
 import Login from './components/Login';
-import { FileText, Settings } from 'lucide-react';
+import { FileText, Settings, Menu } from 'lucide-react';
 
 const App: React.FC = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [activeTab, setActiveTab] = useState('dashboard');
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const renderContent = () => {
     switch (activeTab) {
@@ -61,9 +62,30 @@ const App: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen w-full bg-brand-bg flex">
-      <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} onLogout={() => setIsAuthenticated(false)} />
-      <main className="flex-1 ml-64 p-10 overflow-y-auto">
+    <div className="min-h-screen w-full bg-brand-bg flex flex-col md:flex-row font-sans">
+      {/* Mobile Header */}
+      <div className="md:hidden fixed top-0 left-0 right-0 h-16 bg-white border-b border-slate-100 flex items-center justify-between px-4 z-40 shadow-sm">
+        <img src="/brilla.svg" alt="Brilla Logo" className="h-8 w-auto" />
+        <button 
+          onClick={() => setIsMobileMenuOpen(true)}
+          className="p-2 text-slate-500 hover:bg-slate-50 rounded-lg transition-colors"
+        >
+          <Menu className="w-6 h-6" />
+        </button>
+      </div>
+
+      <Sidebar 
+        activeTab={activeTab} 
+        setActiveTab={(tab) => {
+          setActiveTab(tab);
+          setIsMobileMenuOpen(false);
+        }} 
+        onLogout={() => setIsAuthenticated(false)} 
+        isOpen={isMobileMenuOpen}
+        onClose={() => setIsMobileMenuOpen(false)}
+      />
+      
+      <main className="flex-1 md:ml-64 p-4 md:p-10 pt-20 md:pt-10 overflow-y-auto overflow-x-hidden min-h-screen w-full max-w-full">
         {renderContent()}
       </main>
     </div>

@@ -83,14 +83,14 @@ const Dashboard: React.FC = () => {
       {/* Sezione Centrale */}
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
         {/* Grafico Bilancio Energetico */}
-        <div className="lg:col-span-3 bg-white p-6 rounded-3xl shadow-sm border border-slate-100 h-[580px] flex flex-col">
-          <div className="flex justify-between items-center mb-6">
+        <div className="lg:col-span-3 bg-white p-4 md:p-6 rounded-3xl shadow-sm border border-slate-100 h-[600px] md:h-[580px] flex flex-col">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 md:gap-0 mb-6">
             <div>
               <h3 className="text-xl font-bold text-secondary">Bilancio Energetico</h3>
               <p className="text-xs text-slate-400">Produzione e consumi</p>
             </div>
-            <div className="flex gap-4 items-center">
-              <div className="flex gap-4 items-center mr-4">
+            <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center w-full md:w-auto">
+              <div className="flex flex-wrap gap-3 sm:gap-4 items-center sm:mr-4">
                 <div className="flex items-center gap-2 text-[10px] font-bold">
                   <div className="w-2 h-2 rounded-full bg-sky-400"></div>
                   <span className="text-slate-500">Produzione CER</span>
@@ -104,14 +104,15 @@ const Dashboard: React.FC = () => {
                   <span className="text-slate-500">Condivisione CER</span>
                 </div>
               </div>
-              <select className="bg-slate-50 border border-slate-200 rounded-lg px-3 py-1.5 text-xs font-bold text-slate-600 outline-none">
+              <select className="bg-slate-50 border border-slate-200 rounded-lg px-3 py-1.5 text-xs font-bold text-slate-600 outline-none w-full sm:w-auto">
                 <option>Ieri</option>
                 <option>Ultimi 7 giorni</option>
               </select>
             </div>
           </div>
           
-          <div className="flex-1 bg-slate-50 rounded-2xl border border-slate-100 relative overflow-hidden">
+          <div className="flex-1 bg-slate-50 rounded-2xl border border-slate-100 overflow-x-auto overflow-y-hidden scrollbar-hide">
+            <div className="min-w-[700px] h-full min-h-[350px] lg:min-h-0 relative">
             {/* Y-axis labels */}
             <div className="absolute left-4 top-10 bottom-10 w-12 flex flex-col justify-between text-[10px] text-slate-400 font-bold items-end pr-2 z-10">
               <span>3k</span>
@@ -200,7 +201,7 @@ const Dashboard: React.FC = () => {
                 <circle key={`s${i}`} cx={cx} cy={cy} r="9" fill="white" stroke="#34d399" strokeWidth="3"/>
               ))}
             </svg>
-
+            </div>
           </div>
         </div>
 
@@ -238,36 +239,37 @@ const Dashboard: React.FC = () => {
       </div>
 
       {/* Stime Incentivi */}
-      <div className="bg-white p-6 rounded-3xl shadow-sm border border-slate-100">
-        <div className="flex justify-between items-center mb-6">
+      <div className="bg-white p-4 md:p-6 rounded-3xl shadow-sm border border-slate-100">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
           <div>
             <h3 className="text-xl font-bold text-secondary">Stime Incentivi</h3>
             <p className="text-xs text-slate-400 mt-0.5">Valori mensili · Luglio 2025</p>
           </div>
-          <div className="flex items-center gap-4">
-            <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center gap-3 md:gap-4 w-full md:w-auto">
+            <div className="flex flex-wrap items-center gap-3">
               <div className="flex items-center gap-1.5 text-[10px] font-bold text-slate-500">
                 <div className="w-2.5 h-2.5 rounded-full bg-emerald-400"></div>
-                Stime incentivi ad oggi
+                Stime ad oggi
               </div>
               <div className="flex items-center gap-1.5 text-[10px] font-bold text-slate-400">
                 <div className="w-2.5 h-2.5 rounded-full border-2 border-dashed border-slate-300"></div>
-                Stime incentivi previsti
+                Stime previste
               </div>
             </div>
-            <div className="flex items-center gap-2 bg-slate-50 border border-slate-200 rounded-xl px-3 py-1.5 text-xs font-bold text-slate-600">
+            <div className="flex items-center gap-2 bg-slate-50 border border-slate-200 rounded-xl px-3 py-1.5 text-xs font-bold text-slate-600 ml-auto md:ml-0">
               <span>Luglio 2025</span>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
             </div>
-            <button className="p-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-500 hover:text-secondary transition-colors">
+            <button className="p-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-500 hover:text-secondary transition-colors hidden sm:block">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg>
             </button>
           </div>
         </div>
 
-        <div className="flex gap-6">
+        <div className="flex flex-col lg:flex-row gap-6">
           {/* Chart */}
-          <div className="flex-1 relative bg-slate-50 rounded-2xl border border-slate-100 overflow-hidden" style={{ minHeight: 260 }}>
+          <div className="flex-1 bg-slate-50 rounded-2xl border border-slate-100 overflow-x-auto overflow-y-hidden scrollbar-hide" style={{ minHeight: 260 }}>
+            <div className="min-w-[550px] h-full relative min-h-[260px]">
             {/* Y-axis labels */}
             <div className="absolute left-2 top-6 bottom-8 w-10 flex flex-col justify-between text-[9px] text-slate-400 font-bold items-end pr-1 z-10">
               <span>250</span>
@@ -324,21 +326,22 @@ const Dashboard: React.FC = () => {
               <rect x="510" y="4" width="90" height="22" rx="5" fill="#1e293b" />
               <text x="555" y="18" textAnchor="middle" dominantBaseline="middle" fill="white" fontSize="11" fontWeight="bold" fontFamily="Inter,sans-serif">180,20 €</text>
             </svg>
+            </div>
           </div>
 
           {/* Stima box */}
-          <div className="flex flex-col gap-4 w-52">
-            <div className="bg-slate-50 border border-slate-100 rounded-2xl p-5 flex flex-col">
+          <div className="flex lg:flex-col gap-4 w-full lg:w-52">
+            <div className="bg-slate-50 border border-slate-100 rounded-2xl p-5 flex flex-col flex-1">
               <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2">Stima incentivi<br/>mese corrente</p>
-              <p className="text-3xl font-extrabold text-secondary tracking-tight">180,20 <span className="text-xl">€</span></p>
+              <p className="text-2xl md:text-3xl font-extrabold text-secondary tracking-tight">180,20 <span className="text-lg md:text-xl">€</span></p>
               <div className="mt-3 flex items-center gap-1.5">
-                <svg className="w-3 h-3 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
-                <span className="text-[10px] font-bold text-emerald-500">+3.6% rispetto alla media</span>
+                <svg className="w-3 h-3 text-emerald-500 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+                <span className="text-[10px] font-bold text-emerald-500">+3.6%</span>
               </div>
             </div>
-            <div className="bg-emerald-50 border border-emerald-100 rounded-2xl p-5 flex flex-col">
+            <div className="bg-emerald-50 border border-emerald-100 rounded-2xl p-5 flex flex-col flex-1">
               <p className="text-[10px] font-bold text-emerald-600 uppercase tracking-wider mb-2">Proiezione fine<br/>mese</p>
-              <p className="text-2xl font-extrabold text-emerald-700 tracking-tight">352,40 <span className="text-base">€</span></p>
+              <p className="text-xl md:text-2xl font-extrabold text-emerald-700 tracking-tight">352,40 <span className="text-sm md:text-base">€</span></p>
             </div>
           </div>
         </div>

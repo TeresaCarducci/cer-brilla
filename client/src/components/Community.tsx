@@ -147,13 +147,13 @@ const Community: React.FC = () => {
         <div className="p-8 flex-1 flex flex-col space-y-12">
           
           {/* Cashback Widget */}
-          <div className="w-full rounded-3xl bg-gradient-to-br from-emerald-400 to-cyan-500 p-8 flex justify-between items-center text-white shadow-lg relative overflow-hidden">
+          <div className="w-full rounded-3xl bg-gradient-to-br from-emerald-400 to-cyan-500 p-6 md:p-8 flex flex-col md:flex-row justify-between items-center text-white shadow-lg relative overflow-hidden gap-6 md:gap-0">
             {/* Decorative background elements */}
             <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/4 blur-2xl"></div>
             <div className="absolute bottom-0 left-0 w-48 h-48 bg-blue-500/20 rounded-full translate-y-1/3 -translate-x-1/4 blur-xl"></div>
 
-            <div className="flex items-center gap-6 relative z-10">
-              <div className="w-20 h-20 rounded-full bg-white/20 flex items-center justify-center overflow-hidden border-2 border-white/30 backdrop-blur-sm shadow-inner">
+            <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 relative z-10 text-center sm:text-left">
+              <div className="w-20 h-20 rounded-full bg-white/20 flex items-center justify-center overflow-hidden border-2 border-white/30 backdrop-blur-sm shadow-inner shrink-0">
                 <User className="w-10 h-10 text-white/90" />
               </div>
               <div>
@@ -162,7 +162,7 @@ const Community: React.FC = () => {
               </div>
             </div>
 
-            <div className="bg-white/10 backdrop-blur-md rounded-2xl px-8 py-5 flex flex-col items-center justify-center border border-white/20 relative z-10 shadow-[0_8px_32px_0_rgba(31,38,135,0.1)]">
+            <div className="bg-white/10 backdrop-blur-md rounded-2xl px-8 py-5 flex flex-col items-center justify-center border border-white/20 relative z-10 shadow-[0_8px_32px_0_rgba(31,38,135,0.1)] w-full md:w-auto">
               <p className="text-3xl font-extrabold tracking-tight">€ {selectedMember.performance.cashback.toFixed(2).replace('.', ',')}</p>
               <p className="text-sm text-purple-100 mt-1 font-medium tracking-wide uppercase">Cashback</p>
             </div>
@@ -238,7 +238,8 @@ const Community: React.FC = () => {
               {/* Chart Section */}
               <div className="flex-1 flex flex-col">
 
-              <div className="bg-slate-50 rounded-xl p-8 border border-slate-100 flex-1 relative overflow-hidden min-h-[400px]">
+              <div className="bg-slate-50 rounded-xl border border-slate-100 flex-1 overflow-x-auto overflow-y-hidden scrollbar-hide min-h-[400px]">
+                <div className="min-w-[650px] h-full relative p-8">
                 {/* Y-axis labels */}
                 <div className="absolute left-4 top-10 bottom-10 w-12 flex flex-col justify-between text-[10px] text-slate-400 font-bold items-end pr-2 z-10">
                   <span>3k</span>
@@ -284,6 +285,7 @@ const Community: React.FC = () => {
                     </div>
                   ))}
                 </div>
+                </div>
 
               </div>
 
@@ -319,9 +321,9 @@ const Community: React.FC = () => {
 
           {/* Sezione POD */}
           <section>
-            <div className="flex justify-between items-center mb-6">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 sm:gap-0 mb-6">
               <h3 className="text-xl font-bold text-secondary">Dati POD</h3>
-              <button className="flex items-center gap-2 px-4 py-2 bg-secondary text-white rounded-lg hover:bg-slate-800 transition-colors shadow-sm text-sm font-bold">
+              <button className="flex items-center justify-center gap-2 px-4 py-2 bg-secondary text-white rounded-lg hover:bg-slate-800 transition-colors shadow-sm text-sm font-bold w-full sm:w-auto">
                 <Plus className="w-4 h-4" />
                 Aggiungi POD
               </button>
@@ -443,20 +445,20 @@ const Community: React.FC = () => {
 
 
       {/* Toolbar */}
-      <div className="p-8 border-b border-slate-50 flex justify-between items-center">
-        <div className="flex items-center gap-6">
-          <div className="relative">
+      <div className="p-4 md:p-8 border-b border-slate-50 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 lg:gap-0">
+        <div className="flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-6 w-full lg:w-auto">
+          <div className="relative w-full md:w-auto">
             <input
               type="text"
               placeholder="Search..."
-              className="pl-4 pr-10 py-2.5 bg-slate-50 border border-slate-100 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 w-72 text-slate-600 transition-all font-medium"
+              className="pl-4 pr-10 py-2.5 bg-slate-50 border border-slate-100 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 w-full md:w-72 text-slate-600 transition-all font-medium"
             />
             <button className="absolute right-0 top-0 bottom-0 px-3 bg-secondary text-white rounded-r-lg hover:bg-slate-800 transition-colors flex items-center justify-center">
               <Search className="w-4 h-4" />
             </button>
           </div>
 
-          <div className="flex gap-4 ml-2 border-l border-slate-200 pl-6 self-stretch items-end pb-0.5">
+          <div className="flex gap-4 md:ml-2 border-l-0 md:border-l border-slate-200 pl-0 md:pl-6 self-start md:self-stretch items-end pb-0.5">
             <button className="text-sm font-bold text-primary-dark border-b-[3px] border-primary pb-1">
               Attivi
             </button>
@@ -466,8 +468,9 @@ const Community: React.FC = () => {
           </div>
         </div>
 
-        <button className="w-10 h-10 bg-secondary text-white rounded-xl flex items-center justify-center hover:bg-slate-800 transition-colors shadow-sm focus:ring-4 focus:ring-primary/20">
-          <Plus className="w-5 h-5" />
+        <button className="w-full lg:w-10 h-10 bg-secondary text-white rounded-xl flex items-center justify-center hover:bg-slate-800 transition-colors shadow-sm focus:ring-4 focus:ring-primary/20 mt-4 lg:mt-0">
+          <Plus className="w-5 h-5 mr-2 lg:mr-0 hidden lg:block" />
+          <span className="lg:hidden flex items-center"><Plus className="w-5 h-5 mr-2" /> Aggiungi Membro</span>
         </button>
       </div>
 

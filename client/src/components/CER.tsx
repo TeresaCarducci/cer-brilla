@@ -44,7 +44,7 @@ const CER: React.FC = () => {
                 </div>
 
                 {/* Stats Bar */}
-                <div className="flex items-center gap-10 px-2 text-slate-400 font-bold">
+                <div className="flex flex-wrap items-center gap-4 lg:gap-10 px-2 text-slate-400 font-bold">
                   <div className="flex items-center gap-3">
                     <Sun className="w-5 h-5 text-slate-300" strokeWidth={2.5} />
                     <span className="text-base tracking-tight">54 kW</span>
@@ -157,11 +157,11 @@ const CER: React.FC = () => {
 
               {/* Action Buttons */}
               <div className="pt-8 flex justify-end items-center">
-                <div className="flex gap-4">
-                  <button className="px-8 py-2.5 bg-white border border-slate-200 text-slate-500 rounded-xl text-[13px] font-bold hover:bg-slate-50 hover:border-slate-300 transition-all active:scale-95">
+                <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+                  <button className="w-full sm:w-auto px-8 py-2.5 bg-white border border-slate-200 text-slate-500 rounded-xl text-[13px] font-bold hover:bg-slate-50 hover:border-slate-300 transition-all active:scale-95">
                     Annulla modifiche
                   </button>
-                  <button className="px-8 py-2.5 bg-[#1a2b3c] text-[#b8e0b0] border border-[#1a2b3c] rounded-xl text-[13px] font-bold hover:bg-slate-800 transition-all shadow-md active:scale-95">
+                  <button className="w-full sm:w-auto px-8 py-2.5 bg-[#1a2b3c] text-[#b8e0b0] border border-[#1a2b3c] rounded-xl text-[13px] font-bold hover:bg-slate-800 transition-all shadow-md active:scale-95">
                     Salva modifiche
                   </button>
                 </div>
@@ -294,7 +294,8 @@ const CER: React.FC = () => {
 
             <div className="flex flex-col lg:flex-row gap-8 items-start">
               {/* Main Chart Card - Clean container */}
-              <div className="flex-1 bg-white border border-slate-100 rounded-[2.5rem] p-10 shadow-sm relative overflow-hidden">
+              <div className="flex-1 bg-white border border-slate-100 rounded-[2.5rem] p-6 lg:p-10 shadow-sm overflow-x-auto overflow-y-hidden scrollbar-hide">
+                <div className="min-w-[650px] relative">
                 {/* Performance Chart (SVG Line/Area) - Extra space for labels */}
                 <div className="relative h-72 w-full pl-8">
                   {/* Y-Axis Lines & Labels */}
@@ -369,6 +370,7 @@ const CER: React.FC = () => {
                     ))}
                   </div>
                 </div>
+                </div>
               </div>
 
               {/* Sidebar Stats (Current Month Overview) */}
@@ -405,12 +407,12 @@ const CER: React.FC = () => {
             {/* --- SEZIONE RIPARTIZIONE INCENTIVI --- */}
             <div className="pt-12 mt-4 border-t border-slate-100 w-full space-y-8">
             {/* Tab Header */}
-            <div className="flex flex-col md:flex-row justify-between items-center md:items-start gap-6 px-1">
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 md:gap-6 px-1">
               <div className="space-y-1">
                 <h3 className="text-xl font-bold text-slate-700 tracking-tight transition-colors group-hover:text-[#00b29a]">Ripartizione Incentivi</h3>
                 <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest px-0.5 opacity-80">Configurazione Distribuzione &bull; Anno 2025</p>
               </div>
-              <button className="flex items-center gap-2.5 bg-[#1a2b3c] text-[#b8e0b0] px-6 py-2.5 rounded-xl text-[11px] font-bold hover:bg-slate-800 transition-all shadow-md active:scale-95">
+              <button className="flex items-center justify-center gap-2.5 bg-[#1a2b3c] text-[#b8e0b0] px-6 py-2.5 rounded-xl text-[11px] font-bold hover:bg-slate-800 transition-all shadow-md active:scale-95 w-full md:w-auto">
                 <PieChart className="w-4 h-4" />
                 Modifica Regole
               </button>
@@ -551,12 +553,12 @@ const CER: React.FC = () => {
 
       <div className="bg-white rounded-3xl border border-slate-100 shadow-sm overflow-hidden min-h-[600px] flex flex-col">
         {/* Navigation Tabs */}
-        <div className="flex border-b border-slate-100 px-8 bg-slate-50/30">
+        <div className="flex overflow-x-auto whitespace-nowrap scrollbar-hide border-b border-slate-100 px-4 md:px-8 bg-slate-50/30">
           {tabs.map((tab) => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`flex items-center gap-2 px-6 py-5 font-bold text-sm transition-all relative ${activeTab === tab.id
+              className={`flex items-center gap-2 px-4 md:px-6 py-5 font-bold text-sm transition-all relative shrink-0 ${activeTab === tab.id
                 ? 'text-secondary border-b-[3px] border-primary'
                 : 'text-slate-500 hover:text-secondary border-b-[3px] border-transparent font-semibold'
                 }`}
@@ -571,7 +573,7 @@ const CER: React.FC = () => {
         </div>
 
         {/* Content Area */}
-        <div className="p-8 flex-1">
+        <div className="p-4 md:p-8 flex-1">
           {renderTabContent()}
         </div>
       </div>

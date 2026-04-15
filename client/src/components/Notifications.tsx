@@ -18,7 +18,7 @@ const Notifications: React.FC = () => {
 
   return (
     <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
-      <div className="flex justify-between items-center">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 md:gap-0">
         <div>
           <h2 className="text-3xl font-bold text-secondary flex items-center gap-3">
             <Bell className="w-8 h-8 text-primary" />
@@ -26,7 +26,7 @@ const Notifications: React.FC = () => {
           </h2>
           <p className="text-slate-500 mt-2">Gestisci avvisi, anomalie e raccomandazioni AI</p>
         </div>
-        <button className="flex items-center gap-2 px-4 py-2 bg-slate-50 text-slate-600 rounded-xl border border-slate-200 hover:bg-slate-100 transition-colors font-bold text-sm">
+        <button className="flex items-center justify-center gap-2 px-4 py-2 bg-slate-50 text-slate-600 rounded-xl border border-slate-200 hover:bg-slate-100 transition-colors font-bold text-sm w-full md:w-auto">
           <CheckCircle2 className="w-4 h-4" />
           Segna tutte come lette
         </button>
