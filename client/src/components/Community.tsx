@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { User, ShieldCheck, Zap, ArrowLeft, TrendingUp, BarChart3, PieChart, Coins, Search, Plus, FileEdit, Trash2, Power, MoreVertical, LayoutGrid } from 'lucide-react';
+import { User, ArrowLeft, Search, Plus, FileEdit, Trash2 } from 'lucide-react';
 
 interface Member {
   id: string;

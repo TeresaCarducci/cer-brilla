@@ -1,6 +1,14 @@
- # Struttura di Navigazione: Web App Gestore Ente
+# Struttura di Navigazione: Web App Gestore Ente
 
 La piattaforma **Brilla** è un ecosistema digitale progettato per fornire all'Ente un controllo completo e sofisticato su tutti gli aspetti della gestione della comunità energetica. L'interfaccia per i gestori è potente ma facile da usare, consentendo di monitorare l'efficienza della CER e lo stato dell'impianto in ogni momento.
+
+## Menu / Sidebar
+### GENERALE
+- Dashboard
+- CER
+- Community
+- Notifiche
+- Impostazioni
 
 ## 0. Accesso e Sicurezza
 
@@ -45,5 +53,3 @@ Area per la validazione dei dati economici e degli incentivi ottenuti tramite il
 
 ### Archivio Report
 Generatore di documenti mensili dettagliati (es. Report Maggio 2025) pronti per la consultazione web o la stampa.
-
-## 4. Dati CER

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Sidebar from './components/Sidebar';
 import Dashboard from './components/Dashboard';
 import Community from './components/Community';
+import CER from './components/CER';
 import Notifications from './components/Notifications';
 import Login from './components/Login';
 import { FileText, Settings } from 'lucide-react';
@@ -16,6 +17,8 @@ const App: React.FC = () => {
         return <Dashboard />;
       case 'community':
         return <Community />;
+      case 'cer':
+        return <CER />;
       case 'notifications':
         return <Notifications />;
       case 'reports':

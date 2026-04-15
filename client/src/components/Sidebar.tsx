@@ -1,5 +1,5 @@
 import React from 'react';
-import { LayoutDashboard, Users, Settings, Bell } from 'lucide-react';
+import { LayoutDashboard, Users, Settings, Bell, Zap } from 'lucide-react';
 
 interface SidebarProps {
   activeTab: string;
@@ -11,6 +11,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab, onLogout }) 
   const menuItems = [
     { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
     { id: 'community', label: 'Community', icon: Users },
+    { id: 'cer', label: 'CER', icon: Zap },
     { id: 'notifications', label: 'Notifiche', icon: Bell },
     { id: 'settings', label: 'Impostazioni', icon: Settings },
   ];
@@ -30,16 +31,14 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab, onLogout }) 
             <li key={item.id}>
               <button
                 onClick={() => setActiveTab(item.id)}
-                className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 text-sm font-semibold ${
-                  activeTab === item.id
-                    ? 'bg-[#b8e0b0] text-[#1a3d2b]'
-                    : 'text-slate-500 hover:bg-slate-50 hover:text-slate-700'
-                }`}
+                className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 text-sm font-semibold ${activeTab === item.id
+                  ? 'bg-[#b8e0b0] text-[#1a3d2b]'
+                  : 'text-slate-500 hover:bg-slate-50 hover:text-slate-700'
+                  }`}
               >
                 <item.icon
-                  className={`w-5 h-5 flex-shrink-0 ${
-                    activeTab === item.id ? 'text-[#2d6a3f]' : 'text-slate-400'
-                  }`}
+                  className={`w-5 h-5 flex-shrink-0 ${activeTab === item.id ? 'text-[#2d6a3f]' : 'text-slate-400'
+                    }`}
                   strokeWidth={1.8}
                 />
                 {item.label}
