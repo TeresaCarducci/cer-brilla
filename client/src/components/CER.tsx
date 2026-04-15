@@ -4,7 +4,6 @@ import {
   Zap, 
   Factory, 
   Coins, 
-  BarChart3, 
   ChevronRight, 
   Sun, 
   Users, 
@@ -25,7 +24,6 @@ const CER: React.FC = () => {
     { id: 'Dati CER', label: 'Dati CER', icon: Info },
     { id: 'Impianto', label: 'Impianto', icon: Factory },
     { id: 'Incentivi', label: 'Incentivi', icon: Coins },
-    { id: 'Ripartizione Incentivi', label: 'Ripartizione Incentivi', icon: BarChart3 },
   ];
 
   const renderTabContent = () => {
@@ -38,7 +36,7 @@ const CER: React.FC = () => {
               {/* Left Column: Identity, Stats, Legal */}
               <div className="lg:w-1/2 flex flex-col space-y-8">
                 {/* Logo & Name Row */}
-                <div className="bg-slate-50/30 rounded-full py-3.5 px-6 flex items-center gap-5 border border-slate-100 shadow-sm self-start min-w-[280px]">
+                <div className="bg-slate-50/30 rounded-2xl py-3.5 px-6 flex items-center gap-5 border border-slate-100 shadow-sm w-full">
                   <div className="w-11 h-11 rounded-full border-2 border-[#b8e0b0] bg-white flex items-center justify-center shadow-inner overflow-hidden flex-shrink-0">
                     <Sun className="w-6 h-6 text-[#2d6a3f]" strokeWidth={2.5} />
                   </div>
@@ -403,11 +401,9 @@ const CER: React.FC = () => {
                 </div>
               </div>
             </div>
-          </div>
-        );
-      case 'Ripartizione Incentivi':
-        return (
-          <div className="animate-in fade-in slide-in-from-bottom-4 duration-500 w-full space-y-8 pb-16">
+
+            {/* --- SEZIONE RIPARTIZIONE INCENTIVI --- */}
+            <div className="pt-12 mt-4 border-t border-slate-100 w-full space-y-8">
             {/* Tab Header */}
             <div className="flex flex-col md:flex-row justify-between items-center md:items-start gap-6 px-1">
               <div className="space-y-1">
@@ -534,6 +530,7 @@ const CER: React.FC = () => {
                 </div>
               </div>
             </div>
+          </div>
           </div>
         );
       default:

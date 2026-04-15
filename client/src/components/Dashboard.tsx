@@ -1,5 +1,5 @@
 import React from 'react';
-import { TrendingUp, Battery, Zap, Activity, Bell, AlertTriangle, ShieldCheck } from 'lucide-react';
+import { TrendingUp, Battery, Zap, Activity, ShieldCheck, Users } from 'lucide-react';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
@@ -47,11 +47,6 @@ const Dashboard: React.FC = () => {
     },
   ];
 
-  const notifications = [
-    { id: 1, title: 'Anomalia Inverter 2', description: 'Rilevato calo di tensione anomalo nella CER.', time: '2 min fa', type: 'error' },
-    { id: 2, title: 'POD #452 Offline', description: 'Il carico aziendale non risponde alle query AI.', time: '15 min fa', type: 'warning' },
-    { id: 3, title: 'Ottimizzazione Suggerita', description: 'Opportunità di condivisione energia tra Consumer 1 e 3.', time: '1 ora fa', type: 'info' },
-  ];
 
   return (
     <div className="space-y-8 animate-in fade-in duration-500">
@@ -86,9 +81,9 @@ const Dashboard: React.FC = () => {
       </div>
 
       {/* Sezione Centrale */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
         {/* Grafico Bilancio Energetico */}
-        <div className="lg:col-span-2 bg-white p-6 rounded-3xl shadow-sm border border-slate-100 min-h-[400px] flex flex-col">
+        <div className="lg:col-span-3 bg-white p-6 rounded-3xl shadow-sm border border-slate-100 h-[580px] flex flex-col">
           <div className="flex justify-between items-center mb-6">
             <div>
               <h3 className="text-xl font-bold text-secondary">Bilancio Energetico</h3>
@@ -110,13 +105,13 @@ const Dashboard: React.FC = () => {
                 </div>
               </div>
               <select className="bg-slate-50 border border-slate-200 rounded-lg px-3 py-1.5 text-xs font-bold text-slate-600 outline-none">
-                <option>Oggi</option>
+                <option>Ieri</option>
                 <option>Ultimi 7 giorni</option>
               </select>
             </div>
           </div>
           
-          <div className="flex-1 bg-slate-50 rounded-2xl border border-slate-100 relative overflow-hidden min-h-[400px]">
+          <div className="flex-1 bg-slate-50 rounded-2xl border border-slate-100 relative overflow-hidden">
             {/* Y-axis labels */}
             <div className="absolute left-4 top-10 bottom-10 w-12 flex flex-col justify-between text-[10px] text-slate-400 font-bold items-end pr-2 z-10">
               <span>3k</span>
@@ -209,43 +204,36 @@ const Dashboard: React.FC = () => {
           </div>
         </div>
 
-        {/* Centro Notifiche AI */}
-        <div className="bg-white p-6 rounded-3xl shadow-sm border border-slate-100 flex flex-col">
-          <div className="flex justify-between items-center mb-6">
-            <h3 className="text-xl font-bold text-secondary flex items-center gap-2">
-              <Bell className="w-5 h-5 text-primary" />
-              Notifiche AI
+        {/* Riepilogo Membri */}
+        <div className="bg-white p-5 rounded-3xl shadow-sm border border-slate-100 flex flex-col self-start">
+          <div className="flex justify-between items-center mb-5">
+            <h3 className="text-lg font-bold text-secondary flex items-center gap-2">
+              <Users className="w-5 h-5 text-[#b8e0b0]" />
+              Membri CER
             </h3>
-            <span className="bg-red-50 text-red-600 text-[10px] font-bold px-2 py-0.5 rounded-full">
-              {notifications.length} NUOVE
+            <span className="bg-[#b8e0b0]/20 text-[#2d6a3f] text-[9px] font-bold px-2 py-1 rounded-full">
+              5 ATTIVI
             </span>
           </div>
-          <div className="space-y-4 flex-1">
-            {notifications.map((notif) => (
-              <div key={notif.id} className="p-4 rounded-2xl bg-slate-50 border border-slate-100 group hover:border-primary/30 transition-all cursor-pointer">
-                <div className="flex justify-between items-start mb-2">
-                  <h4 className="font-bold text-secondary text-sm">{notif.title}</h4>
-                  <span className="text-[9px] text-slate-400 font-bold uppercase">{notif.time}</span>
+          <div className="space-y-1.5">
+            {[
+              { id: 1, name: 'Mario', surname: 'Rossi', role: 'Prosumer', initials: 'MR', bg: 'bg-orange-100', text: 'text-orange-600' },
+              { id: 2, name: 'Luigi', surname: 'Bianchi', role: 'Consumer', initials: 'LB', bg: 'bg-blue-100', text: 'text-blue-600' },
+              { id: 3, name: 'Anna', surname: 'Neri', role: 'Consumer', initials: 'AN', bg: 'bg-yellow-100', text: 'text-yellow-600' },
+              { id: 4, name: 'Elena', surname: 'Verdi', role: 'Consumer', initials: 'EV', bg: 'bg-pink-100', text: 'text-pink-600' },
+              { id: 5, name: 'Marco', surname: 'Gialli', role: 'Consumer', initials: 'MG', bg: 'bg-indigo-100', text: 'text-indigo-600' },
+            ].map((member) => (
+              <div key={member.id} className="flex items-center gap-3 p-1.5 rounded-2xl hover:bg-slate-50 transition-colors cursor-pointer group">
+                <div className={cn("w-8 h-8 rounded-full flex shrink-0 items-center justify-center font-bold text-xs", member.bg, member.text)}>
+                  {member.initials}
                 </div>
-                <p className="text-xs text-slate-500 leading-relaxed mb-3">{notif.description}</p>
-                <div className="flex items-center gap-2">
-                  {notif.type === 'error' && <AlertTriangle className="w-3 h-3 text-red-500" />}
-                  {notif.type === 'warning' && <Activity className="w-3 h-3 text-orange-400" />}
-                  {notif.type === 'info' && <ShieldCheck className="w-3 h-3 text-blue-400" />}
-                  <span className={cn(
-                    "text-[9px] font-bold uppercase tracking-wider",
-                    notif.type === 'error' ? "text-red-500" :
-                      notif.type === 'warning' ? "text-orange-500" : "text-blue-500"
-                  )}>
-                    {notif.type === 'error' ? 'Critico' : notif.type === 'warning' ? 'Attenzione' : 'Analisi AI'}
-                  </span>
+                <div className="flex-1 min-w-0">
+                  <h4 className="font-bold text-secondary text-[13px] group-hover:text-[#2d6a3f] transition-colors truncate">{member.name} {member.surname}</h4>
+                  <p className="text-[11px] text-slate-500 font-medium truncate">{member.role}</p>
                 </div>
               </div>
             ))}
           </div>
-          <button className="mt-6 w-full py-3 rounded-xl bg-secondary text-white hover:bg-slate-800 transition-all font-bold text-sm">
-            Archivio Notifiche
-          </button>
         </div>
       </div>
 

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { User, ArrowLeft, Search, Plus, FileEdit, Trash2 } from 'lucide-react';
+import { User, ArrowLeft, Plus, Search, FileEdit, Trash2 } from 'lucide-react';
 
 interface Member {
   id: string;
@@ -115,62 +115,64 @@ const members: Member[] = [
 
 const Community: React.FC = () => {
   const [selectedMember, setSelectedMember] = useState<Member | null>(null);
-  const [activeDetailsTab, setActiveDetailsTab] = useState<'Anagrafica' | 'Energia' | 'POD'>('Anagrafica');
 
   if (selectedMember) {
     return (
-      <div className="bg-white rounded-3xl border border-slate-100 shadow-sm flex flex-col w-full flex-1 mb-8 animate-in fade-in slide-in-from-right-4 duration-500" style={{ minWidth: '100%' }}>
-        {/* Intestazione */}
-        <div className="px-8 pt-8 pb-6 flex justify-between items-start">
+      <div className="flex flex-col w-full flex-1 mb-8 animate-in fade-in slide-in-from-right-4 duration-500" style={{ minWidth: '100%' }}>
+        {/* Intestazione (fuori dal contenitore) */}
+        <div className="flex items-start gap-4 mb-6">
+          <button
+            onClick={() => setSelectedMember(null)}
+            className="text-slate-400 hover:text-secondary transition-colors mt-1"
+          >
+            <ArrowLeft className="w-6 h-6" />
+          </button>
           <div>
-            <h2 className="text-2xl font-bold text-secondary mb-1">{selectedMember.name}</h2>
-            <div className="flex items-center gap-1.5 text-xs text-slate-400 font-medium whitespace-nowrap">
+            <h2 className="text-[28px] leading-tight font-bold text-secondary">{selectedMember.name}</h2>
+            <div className="flex items-center gap-1.5 text-xs text-slate-400 font-medium whitespace-nowrap mt-1.5">
               <span className="hover:text-secondary cursor-pointer transition-colors" onClick={() => setSelectedMember(null)}>Lista CER</span>
               <span>/</span>
               <span className="hover:text-secondary cursor-pointer transition-colors" onClick={() => setSelectedMember(null)}>CER Sole</span>
               <span>/</span>
               <span className="hover:text-secondary cursor-pointer transition-colors" onClick={() => setSelectedMember(null)}>Utenti</span>
               <span>/</span>
-              <span className="hover:text-secondary cursor-pointer transition-colors">{selectedMember.name}</span>
-              <span>/</span>
-              <span className="font-bold text-secondary">Anagrafica</span>
+              <span className="font-bold text-secondary">{selectedMember.name}</span>
             </div>
           </div>
-          <button
-            onClick={() => { setSelectedMember(null); setActiveDetailsTab('Anagrafica'); }}
-            className="p-2 text-slate-400 hover:bg-slate-50 hover:text-secondary rounded-lg transition-colors border border-transparent hover:border-slate-200 shadow-sm"
-          >
-            <ArrowLeft className="w-5 h-5" />
-          </button>
         </div>
 
-        {/* Navigation Tabs */}
-        <div className="flex border-b border-slate-100 px-8">
-          <button
-            onClick={() => setActiveDetailsTab('Anagrafica')}
-            className={`px-6 py-4 font-bold text-sm transition-colors ${activeDetailsTab === 'Anagrafica' ? 'text-secondary border-b-[3px] border-primary' : 'text-slate-500 hover:text-secondary border-b-[3px] border-transparent font-semibold'}`}
-          >
-            Anagrafica
-          </button>
-          <button
-            onClick={() => setActiveDetailsTab('Energia')}
-            className={`px-6 py-4 font-bold text-sm transition-colors ${activeDetailsTab === 'Energia' ? 'text-secondary border-b-[3px] border-primary' : 'text-slate-500 hover:text-secondary border-b-[3px] border-transparent font-semibold'}`}
-          >
-            Energia
-          </button>
-          <button
-            onClick={() => setActiveDetailsTab('POD')}
-            className={`px-6 py-4 font-bold text-sm transition-colors ${activeDetailsTab === 'POD' ? 'text-secondary border-b-[3px] border-primary' : 'text-slate-500 hover:text-secondary border-b-[3px] border-transparent font-semibold'}`}
-          >
-            POD
-          </button>
-        </div>
+        {/* Contenitore Box Bianco */}
+        <div className="bg-white rounded-3xl border border-slate-100 shadow-sm flex flex-col w-full flex-1">
+        {/* Content Area - Compattato */}
+        <div className="p-8 flex-1 flex flex-col space-y-12">
+          
+          {/* Cashback Widget */}
+          <div className="w-full rounded-3xl bg-gradient-to-br from-emerald-400 to-cyan-500 p-8 flex justify-between items-center text-white shadow-lg relative overflow-hidden">
+            {/* Decorative background elements */}
+            <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/4 blur-2xl"></div>
+            <div className="absolute bottom-0 left-0 w-48 h-48 bg-blue-500/20 rounded-full translate-y-1/3 -translate-x-1/4 blur-xl"></div>
 
-        {/* Content Area */}
-        <div className="p-8 flex-1 flex flex-col">
-          {activeDetailsTab === 'Anagrafica' && (
-            <>
-              <div className="space-y-6 max-w-4xl">
+            <div className="flex items-center gap-6 relative z-10">
+              <div className="w-20 h-20 rounded-full bg-white/20 flex items-center justify-center overflow-hidden border-2 border-white/30 backdrop-blur-sm shadow-inner">
+                <User className="w-10 h-10 text-white/90" />
+              </div>
+              <div>
+                <h3 className="text-2xl font-bold tracking-tight">{selectedMember.name}</h3>
+                <p className="text-purple-100 mt-1 font-medium text-lg">{selectedMember.performance.energiaCondivisa.toLocaleString('it-IT')} <span className="text-sm">kWh</span></p>
+              </div>
+            </div>
+
+            <div className="bg-white/10 backdrop-blur-md rounded-2xl px-8 py-5 flex flex-col items-center justify-center border border-white/20 relative z-10 shadow-[0_8px_32px_0_rgba(31,38,135,0.1)]">
+              <p className="text-3xl font-extrabold tracking-tight">€ {selectedMember.performance.cashback.toFixed(2).replace('.', ',')}</p>
+              <p className="text-sm text-purple-100 mt-1 font-medium tracking-wide uppercase">Cashback</p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 xl:grid-cols-2 gap-12 items-stretch">
+          {/* Sezione Anagrafica */}
+          <section className="flex flex-col">
+            <h3 className="text-xl font-bold text-secondary mb-6">Anagrafica</h3>
+            <div className="space-y-6 bg-slate-50/30 p-8 rounded-2xl border border-slate-100 flex-1">
                 <div>
                   <label className="block text-xs font-bold text-slate-500 mb-2 uppercase tracking-wide">Nome e Cognome</label>
                   <input
@@ -226,46 +228,67 @@ const Community: React.FC = () => {
                   </div>
                 </div>
               </div>
+          </section>
 
-              <div className="mt-auto pt-10 flex justify-end gap-3">
-                <button className="px-6 py-2.5 text-sm font-bold text-slate-500 bg-white border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors">
-                  Annulla modifiche
-                </button>
-                <button className="px-6 py-2.5 text-sm font-bold text-white bg-slate-500 rounded-lg hover:bg-slate-600 transition-colors">
-                  Salva
-                </button>
-              </div>
-            </>
-          )}
-
-          {activeDetailsTab === 'Energia' && (
-            <div className="w-full h-full flex flex-col gap-6">
+          {/* Sezione Energia */}
+          <section className="flex flex-col">
+            <h3 className="text-xl font-bold text-secondary mb-6">Energia</h3>
+            <div className="w-full flex flex-col gap-6 flex-1">
               
-              {/* Cashback Widget */}
-              <div className="w-full rounded-3xl bg-gradient-to-br from-emerald-400 to-cyan-500 p-8 flex justify-between items-center text-white shadow-lg relative overflow-hidden">
-                {/* Decorative background elements */}
-                <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/4 blur-2xl"></div>
-                <div className="absolute bottom-0 left-0 w-48 h-48 bg-blue-500/20 rounded-full translate-y-1/3 -translate-x-1/4 blur-xl"></div>
-
-                <div className="flex items-center gap-6 relative z-10">
-                  <div className="w-20 h-20 rounded-full bg-white/20 flex items-center justify-center overflow-hidden border-2 border-white/30 backdrop-blur-sm shadow-inner">
-                    <User className="w-10 h-10 text-white/90" />
-                  </div>
-                  <div>
-                    <h3 className="text-2xl font-bold tracking-tight">{selectedMember.name}</h3>
-                    <p className="text-purple-100 mt-1 font-medium text-lg">{selectedMember.performance.energiaCondivisa.toLocaleString('it-IT')} <span className="text-sm">kWh</span></p>
-                  </div>
-                </div>
-
-                <div className="bg-white/10 backdrop-blur-md rounded-2xl px-8 py-5 flex flex-col items-center justify-center border border-white/20 relative z-10 shadow-[0_8px_32px_0_rgba(31,38,135,0.1)]">
-                  <p className="text-3xl font-extrabold tracking-tight">€ {selectedMember.performance.cashback.toFixed(2).replace('.', ',')}</p>
-                  <p className="text-sm text-purple-100 mt-1 font-medium tracking-wide uppercase">Cashback</p>
-                </div>
-              </div>
-
               {/* Chart Section */}
               <div className="flex-1 flex flex-col">
-                <div className="flex justify-between items-center mb-6">
+
+              <div className="bg-slate-50 rounded-xl p-8 border border-slate-100 flex-1 relative overflow-hidden min-h-[400px]">
+                {/* Y-axis labels */}
+                <div className="absolute left-4 top-10 bottom-10 w-12 flex flex-col justify-between text-[10px] text-slate-400 font-bold items-end pr-2 z-10">
+                  <span>3k</span>
+                  <span>2.25k</span>
+                  <span>1.5k</span>
+                  <span>0.75k</span>
+                  <span>0</span>
+                </div>
+
+                {/* Horizontal Grid lines */}
+                <div className="absolute left-16 right-8 top-10 bottom-10 flex flex-col justify-between">
+                  <div className="border-b border-dashed border-slate-200 w-full"></div>
+                  <div className="border-b border-dashed border-slate-200 w-full"></div>
+                  <div className="border-b border-dashed border-slate-200 w-full"></div>
+                  <div className="border-b border-dashed border-slate-200 w-full"></div>
+                  <div className="border-b border-slate-300 w-full mb-[-1px] z-10"></div>
+                </div>
+
+                {/* Bar Chart representing the new style */}
+                <div className="absolute left-16 right-16 top-10 bottom-10 flex justify-between items-end z-10">
+                  {[
+                    { time: '02:00', prod: 0, cons: 7 },
+                    { time: '04:00', prod: 0, cons: 8 },
+                    { time: '08:00', prod: 10, cons: 15 },
+                    { time: '10:00', prod: 30, cons: 10 },
+                    { time: '12:00', prod: 35, cons: 12 },
+                    { time: '14:00', prod: 35, cons: 15 },
+                    { time: '16:00', prod: 5,  cons: 5 },
+                    { time: '18:00', prod: 10, cons: 60 },
+                    { time: '20:00', prod: 0,  cons: 30 },
+                    { time: '22:00', prod: 0,  cons: 20 },
+                  ].map((d, i) => (
+                    <div key={i} className="flex flex-col items-center justify-end h-full w-10 group relative">
+                      <div className="w-full h-full bg-slate-200/50 rounded-2xl relative flex items-end justify-center p-1">
+                        <div className="w-full bg-[#bef264] rounded-[10px] transition-all duration-500" style={{ height: `${d.cons}%` }}></div>
+                        {d.prod > 0 && (
+                          <div className="absolute w-full px-0.5 z-10 transition-all duration-500" style={{ bottom: `${d.prod}%` }}>
+                            <div className="w-full h-[2px] bg-[#3b82f6]"></div>
+                          </div>
+                        )}
+                      </div>
+                      <span className="absolute -bottom-8 text-[10px] text-slate-400 font-bold whitespace-nowrap">{d.time}</span>
+                    </div>
+                  ))}
+                </div>
+
+              </div>
+
+              {/* Toolbar Moved Below Chart */}
+              <div className="flex justify-between items-center mt-6">
                 <div className="flex gap-4 items-center">
                   <div className="flex items-center gap-2">
                     <div className="w-3 h-3 rounded-full bg-blue-500"></div>
@@ -289,71 +312,22 @@ const Community: React.FC = () => {
                 </div>
               </div>
 
-              <div className="bg-slate-50 rounded-xl p-8 border border-slate-100 flex-1 relative overflow-hidden min-h-[400px]">
-                {/* Y-axis labels */}
-                <div className="absolute left-4 top-10 bottom-10 w-12 flex flex-col justify-between text-[10px] text-slate-400 font-bold items-end pr-2 z-10">
-                  <span>3k</span>
-                  <span>2.25k</span>
-                  <span>1.5k</span>
-                  <span>0.75k</span>
-                  <span>0</span>
-                </div>
-
-                {/* Horizontal Grid lines */}
-                <div className="absolute left-16 right-8 top-10 bottom-10 flex flex-col justify-between">
-                  <div className="border-b border-dashed border-slate-200 w-full"></div>
-                  <div className="border-b border-dashed border-slate-200 w-full"></div>
-                  <div className="border-b border-dashed border-slate-200 w-full"></div>
-                  <div className="border-b border-dashed border-slate-200 w-full"></div>
-                  <div className="border-b border-slate-300 w-full mb-[-1px] z-10"></div>
-                </div>
-
-                {/* X-axis labels */}
-                <div className="absolute left-16 right-8 bottom-4 flex justify-between text-[10px] text-slate-400 font-bold z-10 pl-6 pr-6">
-                  <span>02:00</span>
-                  <span>04:00</span>
-                  <span>08:00</span>
-                  <span>10:00</span>
-                  <span>12:00</span>
-                  <span>14:00</span>
-                  <span>16:00</span>
-                  <span>18:00</span>
-                  <span>20:00</span>
-                  <span>22:00</span>
-                </div>
-
-                {/* SVG Chart */}
-                <svg className="absolute left-16 right-8 top-10 bottom-10 w-[calc(100%-6rem)] h-[calc(100%-5rem)]" preserveAspectRatio="none">
-                  {/* Produzione (Blue line) */}
-                  <path d="M 0 100% L 10% 100% L 20% 100% L 30% 90% L 40% 70% L 50% 65% L 60% 65% L 70% 95% L 80% 90% L 90% 100% L 100% 100%" fill="none" stroke="#3b82f6" strokeWidth="2" />
-                  <path d="M 0 100% L 10% 100% L 20% 100% L 30% 90% L 40% 70% L 50% 65% L 60% 65% L 70% 95% L 80% 90% L 90% 100% L 100% 100% L 100% 100% L 0 100% Z" fill="rgba(59, 130, 246, 0.1)" />
-
-                  {/* Consumo (Yellow/Primary line) */}
-                  <path d="M 0 95% L 10% 93% L 20% 92% L 30% 85% L 40% 90% L 50% 88% L 60% 85% L 70% 95% L 80% 40% L 90% 70% L 100% 80%" fill="none" stroke="#bef264" strokeWidth="2" />
-                  <path d="M 0 95% L 10% 93% L 20% 92% L 30% 85% L 40% 90% L 50% 88% L 60% 85% L 70% 95% L 80% 40% L 90% 70% L 100% 80% L 100% 100% L 0 100% Z" fill="rgba(190, 242, 100, 0.15)" />
-
-                  {/* Data points Produzione */}
-                  <circle cx="30%" cy="90%" r="4" fill="white" stroke="#3b82f6" strokeWidth="2" />
-                  <circle cx="40%" cy="70%" r="4" fill="white" stroke="#3b82f6" strokeWidth="2" />
-                  <circle cx="50%" cy="65%" r="4" fill="white" stroke="#3b82f6" strokeWidth="2" />
-                  <circle cx="60%" cy="65%" r="4" fill="white" stroke="#3b82f6" strokeWidth="2" />
-
-                  {/* Data points Consumo */}
-                  <circle cx="20%" cy="92%" r="4" fill="white" stroke="#bef264" strokeWidth="2" />
-                  <circle cx="80%" cy="40%" r="4" fill="white" stroke="#bef264" strokeWidth="2" />
-                  <circle cx="90%" cy="70%" r="4" fill="white" stroke="#bef264" strokeWidth="2" />
-                </svg>
-
               </div>
             </div>
-            </div>
-          )}
+          </section>
+          </div>
 
-          {activeDetailsTab === 'POD' && (
-            <div className="w-full flex flex-col items-end">
-              <button className="w-8 h-8 bg-secondary text-white rounded flex items-center justify-center hover:bg-slate-800 transition-colors shadow-sm mb-6">
+          {/* Sezione POD */}
+          <section>
+            <div className="flex justify-between items-center mb-6">
+              <h3 className="text-xl font-bold text-secondary">Dati POD</h3>
+              <button className="flex items-center gap-2 px-4 py-2 bg-secondary text-white rounded-lg hover:bg-slate-800 transition-colors shadow-sm text-sm font-bold">
                 <Plus className="w-4 h-4" />
+                Aggiungi POD
               </button>
+            </div>
+
+            <div className="w-full flex flex-col items-end">
 
               <div className="w-full bg-slate-50/50 rounded-2xl border border-slate-100 p-8 flex flex-col relative group">
                 {/* Dots menu */}
@@ -433,7 +407,20 @@ const Community: React.FC = () => {
                 </div>
               </div>
             </div>
-          )}
+          </section>
+
+          {/* Azioni finali */}
+          <div className="pt-4 mt-8 border-t border-slate-100 flex justify-end gap-3">
+            <button className="px-6 py-2.5 text-sm font-bold text-slate-500 bg-white border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors" onClick={() => setSelectedMember(null)}>
+              Annulla modifiche
+            </button>
+            <button className="px-6 py-2.5 text-sm font-bold text-white bg-secondary rounded-lg hover:bg-slate-800 transition-colors px-10">
+              Salva
+            </button>
+          </div>
+
+          </div>
+
         </div>
       </div>
     );

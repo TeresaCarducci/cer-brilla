@@ -1,5 +1,6 @@
 {
     "recommendations": [
-        "tanishqkancharla.opencode-vscode"
+        "tanishqkancharla.opencode-vscode",
+        "bradlc.vscode-tailwindcss"
     ]
 }
